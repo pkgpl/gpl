@@ -1,2 +1,2 @@
-gpl
+gpl: Geophysical Prospecting Library
 ===
