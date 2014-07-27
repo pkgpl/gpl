@@ -1,0 +1,43 @@
+import glob
+import os
+import commands
+
+List=[]
+ruby=glob.glob('*.rb')
+python=glob.glob('*.py')
+shell=glob.glob('*.sh')
+
+for item in ruby:
+	exe=item.replace('.rb','')
+	List.append(exe)
+	check=commands.getstatusoutput("which ruby1.9")
+	if check[0]==0:
+		rb=check[1]
+	else:
+		rb=commands.getstatusoutput("which ruby")[1]
+	Command(exe,item,["echo '#!'%s' -w' > $TARGET ; cat $SOURCE >> $TARGET"%rb,Chmod("$TARGET",0755)])
+
+for item in python:
+	exe=item.replace('.py','')
+	List.append(exe)
+	check=commands.getstatusoutput("which python")
+	if check[0]==0:
+		py=check[1]
+	else:
+		py='/usr/bin/python'
+	Command(exe,item,["echo '#!%s' > $TARGET ; cat $SOURCE >> $TARGET"%py,Chmod("$TARGET",0755)])
+
+for item in shell:
+	exe=item.replace('.sh','')
+	List.append(exe)
+	Command(exe,item,["echo '#!/bin/sh' > $TARGET ; cat $SOURCE >> $TARGET", Chmod("$TARGET",0755)])
+
+bindir='../bin'
+
+Install(bindir,List)
+Alias('install',bindir)
+
+f=open('.gitignore','w')
+for item in List:
+	f.write("%s\n"%item)
+f.close()
