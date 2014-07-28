@@ -1,0 +1,16 @@
+bin/
+include/
+lib/
+bak/
+etc/
+*.o
+*.mod
+*.pyc
+*.a
+.DS_Store
+.sconsign.dblite
+*__genmod.f90
+*.pfc.f90
+*.pfc.c
+*.swp
+script/.gitignore
