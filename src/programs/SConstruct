@@ -1,0 +1,20 @@
+from gpl.scons import *
+import glob
+gplprograms=[]
+if 'ifort' in f90:
+	gpl.Append(F90FLAGS=' -traceback')
+
+# gpl*.f90
+srclist=glob.glob('gpl*.f90')
+for item in srclist:
+	gplprograms.append(gpl.Program(item,LIBS=Split("gpl")))
+
+###
+installdir='../../bin'
+gpl.Install(installdir,gplprograms)
+gpl.Alias('install',installdir)
+
+f=open('.gitignore','w')
+for item in gplprograms:
+	f.write("%s\n"%item[0])
+f.close()

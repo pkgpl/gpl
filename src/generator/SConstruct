@@ -1,0 +1,20 @@
+from gpl.scons import *
+import glob,re
+import os.path
+
+def pfc_ext(fname):
+	name,ext=os.path.splitext(fname)
+	return name+'.pfc'+ext
+
+def pfc_out(pfc_in):
+	return pfc_ext(re.sub(r'pfc.',r'./',pfc_in))
+
+list=glob.glob('pfc.module_*.f90')+glob.glob('pfc.*.c')
+
+modules=[]
+for fin in list:
+	modules.append( gpl.Polyfc(pfc_out(fin),fin) )
+
+installdir='../'
+Install(installdir,modules)
+Alias("install",installdir)

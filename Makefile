@@ -13,8 +13,7 @@ SC_INSTALL= scons -Q install
 SC_UNINSTALL= scons -Q -c install
 
 # install
-#install: env generator_install lib_install include_install program_install script_install
-install: env script_install
+install: env generator_install lib_install include_install program_install script_install
 
 # environment
 ENV_DIR= ./etc
@@ -81,8 +80,8 @@ test:
 	@cd src/test; pfunit
 
 # clean
-#clean: env_clean script_distclean program_distclean include_clean generator_install lib_distclean generator_distclean
-#	rmdir ./bin ./include ./lib
-#	rm gpl/*.pyc gpl/py/*.pyc
-clean: env_clean script_distclean 
-	rmdir ./bin
+clean: env_clean script_distclean program_distclean include_clean generator_install lib_distclean generator_distclean
+	rmdir ./bin ./include ./lib
+	rm gpl/*.pyc gpl/py/*.pyc
+#clean: env_clean script_distclean 
+#	rmdir ./bin

@@ -1,0 +1,35 @@
+from gpl.scons import *
+libs=[]
+
+## gpl
+package_gpl=Split("""
+package_gpl.f90
+module_base.f90
+module_optparse.f90
+
+module_cfunc.f90
+module_binary.pfc.f90
+module_string.pfc.f90
+module_assert.pfc.f90
+""")
+
+package_c=Split("""
+func_cfunc.c
+""")
+
+## modules
+libs.append( Library('gpl',[package_gpl,package_c]) )
+
+### install
+libdir='../lib'
+libsetup=Install(libdir,libs)
+
+Alias('install',libdir)
+
+## install include files
+import glob
+mods=glob.glob("*.mod")
+
+incdir="../include"
+Install(incdir,mods)
+Alias("install_include",incdir)
