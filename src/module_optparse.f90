@@ -30,7 +30,7 @@
 !! call help_footer(msg)
 !! call help_par()
 !! call report_par()
-!! call given_par(key)
+!! given_par(key)
 !!help
         interface from_par
             module procedure from_param_i
@@ -385,7 +385,7 @@
         character(len=*),intent(in):: key,msg
         real,intent(out):: val
         character(len=MXLPAR):: str
-        call helper(key,'r',msg)
+        call helper(key,'f',msg)
         str=trim(valstr(trim(key)))
         read(str,*,err=100,end=100) val
         return
@@ -445,7 +445,7 @@
         integer,intent(out):: n
         character(len=MXLPAR):: str
         integer i,icomma
-        call helper(key,'i',msg)
+        call helper(key,'I',msg)
         str=trim(valstr(trim(key)))
         do i=1,size(arr)
             icomma=index(str,',')
@@ -467,7 +467,7 @@
         integer,intent(out):: n
         character(len=MXLPAR):: str
         integer i,icomma
-        call helper(key,'r',msg)
+        call helper(key,'F',msg)
         str=trim(valstr(trim(key)))
         do i=1,size(arr)
             icomma=index(str,',')
@@ -489,7 +489,7 @@
         integer,intent(out):: n
         character(len=MXLPAR):: str
         integer i,icomma
-        call helper(key,'d',msg)
+        call helper(key,'D',msg)
         str=trim(valstr(trim(key)))
         do i=1,size(arr)
             icomma=index(str,',')
@@ -511,7 +511,7 @@
         integer,intent(out):: n
         character(len=MXLPAR):: str
         integer i,icomma
-        call helper(key,'b',msg)
+        call helper(key,'B',msg)
         str=trim(valstr(trim(key)))
         do i=1,size(arr)
             icomma=index(str,',')
@@ -533,7 +533,7 @@
         integer,intent(out):: n
         character(len=MXLPAR):: str
         integer i,icomma
-        call helper(key,'s',msg)
+        call helper(key,'S',msg)
         str=trim(valstr(trim(key)))
         do i=1,size(arr)
             icomma=index(str,',')
@@ -580,7 +580,7 @@
         real,intent(out):: val
         real,intent(in):: def
         character(len=MXLPAR):: str
-        call helper_opt(key,'r',defmsg,msg)
+        call helper_opt(key,'f',defmsg,msg)
         str=trim(valstr(trim(key)))
         read(str,*,err=100,end=100) val
         return
