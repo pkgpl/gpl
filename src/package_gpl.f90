@@ -10,6 +10,8 @@ module gpl
     use gpl_cfunc
 !! binary io
     use gpl_binary
+    use gpl_hbinary
+    use gpl_stdio
 !! string    
     use gpl_string
     use gpl_assert

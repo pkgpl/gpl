@@ -9,12 +9,16 @@ module_optparse.f90
 
 module_cfunc.f90
 module_binary.pfc.f90
+module_hbinary.pfc.f90
+module_stdio.pfc.f90
 module_string.pfc.f90
 module_assert.pfc.f90
 """)
+# module_stream.pfc.f90
 
 package_c=Split("""
 func_cfunc.c
+func_stdio.pfc.c
 """)
 
 ## modules
