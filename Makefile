@@ -13,7 +13,7 @@ SC_INSTALL= scons -Q install
 SC_UNINSTALL= scons -Q -c install
 
 # install
-install: env generator_install lib_install include_install program_install script_install
+install: generator_install lib_install include_install program_install script_install
 
 # environment
 ENV_DIR= ./etc
@@ -25,9 +25,6 @@ env:
 	@echo 'export PYTHONPATH=$$GPLROOT:$$PYTHONPATH' >> $(ENV_SH)
 	@echo 'export RUBYLIB=$$GPLROOT:.:$$RUBYLIB' >> $(ENV_SH)
 	@echo 'export PATH=$$GPLROOT/bin:$$PATH' >> $(ENV_SH)
-	export GPLROOT=$(GPLROOT)
-	export PYTHONPATH=$(GPLROOT):$(PYTHONPATH)
-	export PATH=$(GPLROOT)/bin:$(PATH)
 env_clean:
 	rm -rf $(ENV_DIR)
 
