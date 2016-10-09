@@ -6,7 +6,7 @@ def extname(path):
 class PlotUtil:
 	@staticmethod
 	def run(cmd):
-		print cmd
+		print(cmd)
 		os.system(cmd)
 	@staticmethod
 	def silent_run(cmd):
@@ -16,7 +16,7 @@ class PlotUtil:
 		msg="\n// adding velocity unit (km/s)"
 		if replace:
 			msg=msg.replace('km/s',replace)
-		print msg
+		print(msg)
 		unittext= \
 """%%%%% plusha - changed position of unit
 GS
@@ -45,11 +45,11 @@ GR
 		PlotUtil.silent_run('mv %s %s'%(tmp,eps))
 	@staticmethod
 	def fix_bbox(eps,lp=2,rp=2,tp=2,bp=3):
-		print "\n// fixing bounding box"
+		print("\n// fixing bounding box")
 		cmd="gs -sDEVICE=bbox -dNOPAUSE -dBATCH %s"%eps
 		pattern='%%BoundingBox:\s(\-*\d+)\s(\-*\d+)\s(\-*\d+)\s(\-*\d+)'
-		import commands,re
-		result=commands.getstatusoutput(cmd)[1]
+		import subprocess,re
+		result=subprocess.getstatusoutput(cmd)[1]
 		for line in result.split('\n'):
 			m=re.match(pattern,line)
 			if m:
@@ -59,11 +59,11 @@ GR
 		PlotUtil.silent_run('mv %s %s'%(tmp,eps))
 	@staticmethod
 	def eps2tif(fin,fout):
-		print "\n// converting EPS to TIFF .."
+		print("\n// converting EPS to TIFF ..")
 		PlotUtil.silent_run("convert -density 600x600 -compress LZW -depth 8 -units PixelsPerInch %s %s"%(fin,fout))
 	@staticmethod
 	def convert(eps,fout):
-		print "\n// converting %s to %s .."%(extname(eps),extname(fout))
+		print("\n// converting %s to %s .."%(extname(eps),extname(fout)))
 		PlotUtil.silent_run('convert -density 600x600 -depth 8 -units PixelsPerInch %s %s'%(eps,fout))
 
 class Psplot:
@@ -114,7 +114,7 @@ class Psplot:
 			opt['d2s']=2
 		# options
 		optstr=''
-		for k,v in opt.iteritems():
+		for k,v in opt.items():
 			if type(v)==str:
 				optstr+='%s="%s" '%(k,v)
 			else:
@@ -139,3 +139,33 @@ for name in ['velocity','velocity_color','gradient','gradient_color','migration'
 	add_method(Psplot,name)
 
 plot=Psplot()
+
+import subprocess
+
+class Cmdplot:
+	@staticmethod
+	def run(cmd):
+		print(cmd)
+		subprocess.call(cmd,shell=True)
+
+	@staticmethod
+	def rsf3d(fout,fin,opt):
+		cmd="plot3d %s %s out=%s"%(fin,opt,fout)
+		Cmdplot.run(cmd)
+		return fout
+
+	@staticmethod
+	def error_cat(fout,fin):
+		ftmp="tmp_error.txt"
+		cmd="cat %s > %s ; plot_error -i %s -o %s"%(fin,ftmp,ftmp,fout)
+		Cmdplot.run(cmd)
+		return fout
+
+	@staticmethod
+	def error(fout,fin):
+		cmd="plot_error -i %s -o %s"%(fin,fout)
+		Cmdplot.run(cmd)
+		return fout
+
+cplot=Cmdplot()
+
