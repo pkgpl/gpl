@@ -65,7 +65,8 @@
             if(otp=='a') then
                 open(11,file=trim(fout))
                 do i1=1,n1
-                  write(11,frmt) (i1-1)*d1,(ia(i1,i2),i2=first,last,step)
+                  !write(11,frmt) (i1-1)*d1,(ia(i1,i2),i2=first,last,step)
+                  write(11,*) (i1-1)*d1,(ia(i1,i2),i2=first,last,step)
                 enddo
                 close(11)
             else
@@ -85,7 +86,8 @@
             if(otp=='a') then
                 open(11,file=trim(fout))
                 do i1=1,n1
-                  write(11,frmt) (i1-1)*d1,(fa(i1,i2),i2=first,last,step)
+                  !write(11,frmt) (i1-1)*d1,(fa(i1,i2),i2=first,last,step)
+                  write(11,*) (i1-1)*d1,(fa(i1,i2),i2=first,last,step)
                 enddo
                 close(11)
             else
@@ -105,7 +107,8 @@
             if(otp=='a') then
                 open(11,file=trim(fout))
                 do i1=1,n1
-                  write(11,frmt) (i1-1)*d1,(da(i1,i2),i2=first,last,step)
+                  !write(11,frmt) (i1-1)*d1,(da(i1,i2),i2=first,last,step)
+                  write(11,*) (i1-1)*d1,(da(i1,i2),i2=first,last,step)
                 enddo
                 close(11)
             else
