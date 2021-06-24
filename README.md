@@ -1,9 +1,6 @@
 gpl: Geophysical Prospecting Library
 ===
 
-Homepage: http://pkgpl.org/softwares/
-
-
 ## Install
 1. Open `gpl/compiler.py` and edit fortran and c compiler options.
 2. `$ make env`
